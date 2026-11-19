@@ -1,22 +1,27 @@
-// Tracker state: what the player earned, their counts toward counted
-// trophies, and the spoiler setting — saved in localStorage, with
-// export to a file and import back. No network: the state never
-// leaves the browser except through the export the player asks for.
+// Tracker state: the trophies the player has earned, the counts toward
+// counted trophies, and the spoiler setting. It is saved in
+// localStorage, with export to a file and import back. No network: the
+// state never leaves the browser except through the export the player
+// asks for.
 export const STORAGE_KEY = 'gta6-trophy-guide-01-v1';
 
-// A demo state for screenshots (?demo=1): a few trophies earned and
-// counts part-way, held in memory only and never written to storage,
-// so a screenshot shows the tracker at work without touching the
-// player's real progress.
+// A demo state for screenshots (?demo=1): a handful of trophies earned
+// and counts part-way, held in memory only and never written to
+// storage, so a screenshot shows the tracker at work without touching
+// the player's real progress.
 export const DEMO_STATE = {
   earned: ['Master of None', 'Stick Fiddler', 'Whip It Good', 'On the Spot', 'Treat Yo Self'],
   counts: { 'Cunning Stunts': 137, 'You WAiNKer!': 42, 'Whip It Good': 100, 'Positive Mental Attitude': 3 },
 };
 
+function emptyState() {
+  return { earned: [], counts: {}, spoilers: true };
+}
+
 export function loadStoredState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return { earned: [], counts: {}, spoilers: true };
+    if (!raw) return emptyState();
     const parsed = JSON.parse(raw);
     return {
       earned: Array.isArray(parsed.earned) ? parsed.earned : [],
@@ -24,7 +29,7 @@ export function loadStoredState() {
       spoilers: parsed.spoilers !== false,
     };
   } catch {
-    return { earned: [], counts: {}, spoilers: true };
+    return emptyState();
   }
 }
 
@@ -76,9 +81,13 @@ export function makeTracker(initial) {
     },
     importJson(text) {
       const parsed = JSON.parse(text);
-      if (!parsed || typeof parsed !== 'object') throw new Error('not an object');
-      if (parsed.earned !== undefined && !Array.isArray(parsed.earned)) throw new Error('earned is not a list');
-      if (parsed.counts !== undefined && (typeof parsed.counts !== 'object' || parsed.counts === null)) throw new Error('counts is not an object');
+      if (!parsed || typeof parsed !== 'object') throw new Error('import is not an object');
+      if (parsed.earned !== undefined && !Array.isArray(parsed.earned)) {
+        throw new Error('import earned is not a list');
+      }
+      if (parsed.counts !== undefined && (typeof parsed.counts !== 'object' || parsed.counts === null)) {
+        throw new Error('import counts is not an object');
+      }
       state.earned = new Set(parsed.earned ?? []);
       state.counts = { ...(parsed.counts ?? {}) };
       tracker.persist();
