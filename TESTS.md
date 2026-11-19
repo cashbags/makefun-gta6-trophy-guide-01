@@ -14,10 +14,16 @@ kit starter's `trophies.json` and adds only our own one-line guides,
 kinds, counts, stages and source keys — so the official fields cannot
 drift. It reports the diff count itself (0 expected), the grade split
 (1 platinum / 2 gold / 6 silver / 46 bronze) and the hidden count
-(28). `main.ts` runs the same check on every run (see §3): a list that
+(28). The file is written compact — one JSON object per trophy on a
+single line — so the official values stay identical while the file
+stays small; re-running the generator reproduces the same bytes.
+`main.ts` runs the same check on every run (see §3): a list that
 lost a trophy or a guide fails the program, not the judge. It also
 checks that every trophy has a strategy in `app/guides.js` with a
-valid status and source keys the data file defines.
+valid status and source keys the data file defines. Each strategy
+carries five parts — what to do, route and sequence, what to have
+ready, when to do it, what can go wrong — checked by importing
+`app/guides.js` and confirming all five are non-blank for all 55.
 
 ## 2. The app runs offline in a real browser
 
