@@ -15,8 +15,8 @@ const kit = JSON.parse(require('fs').readFileSync('../gta6-trophy-guide-01-kit/s
 "
 ```
 
-The check is also run by `main.ts` on every run (see §3): a list that
-lost a trophy or a guide fails the program, not the judge.
+`main.ts` runs the same check on every run (see §3): a list that lost
+a trophy or a guide fails the program, not the judge.
 
 ## 2. The app runs offline in a real browser
 
@@ -26,7 +26,7 @@ node serve.ts          # http://localhost:8080
 
 Open it in desktop Chrome with the network off: the checklist, the
 roadmap, the detail panel, the filters, the spoiler setting and
-export/import all work. Tick a trophy, reload: it stays ticked
+export/import all work. Tick a trophy, reload, and it stays ticked
 (localStorage). Export downloads `gta6-trophy-progress.json`; import
 reads it back. No request leaves the browser — the only fetch is the
 app's own `data/trophies.json`.
@@ -53,10 +53,10 @@ NODE_PATH=/home/hatch/workspace/makefun/bounties/gta6-01/tools/node_modules \
 ```
 
 Playwright + headless Chromium loads each `shots.json` view, waits for
-`window.__shotReady`, and saves JPEG q80 at 1280×800. The script
+`window.__shotReady`, and saves a JPEG at q80, 1280×800. The script
 refuses a capture over 256 KiB and reports every console error and
 failed request. Each file is then read back from disk for its JPEG
-dimensions (long side ≤ 1280, short side ≥ 480) and size — see
+dimensions (long side ≤ 1280, short side ≥ 480) and its size — see
 `CHECK.md` for the last run's numbers.
 
 ## 5. Kit check
