@@ -220,8 +220,10 @@ export function renderTrophyDetail(detailEl, trophy, tracker, sourceNames) {
   const blocks = [
     ['Official description', spoilerHidden ? 'Hidden until earned — turn spoilers off, or earn it, to read it.' : `“${trophy.description}”`],
     ['What to do', spoilerHidden ? 'This is a story trophy: play the story and it unlocks. Its name and description stay hidden here until you earn it.' : (strategy?.strategy ?? trophy.guide)],
-    ['Where and how', spoilerHidden ? 'See the roadmap’s Stage 1 for the story order.' : (strategy?.where ?? guideWhere(trophy))],
+    ['Route and sequence', spoilerHidden ? 'See the roadmap’s Stage 1 for the story order.' : (strategy?.route ?? guideWhere(trophy))],
+    ['Before you start', spoilerHidden ? 'No preparation is needed for a story trophy.' : (strategy?.prep ?? 'Nothing special is needed before you start.')],
     ['When to do it', spoilerHidden ? 'In story order.' : (strategy?.timing ?? 'Any time; nothing about it can be missed.')],
+    ['What can go wrong', spoilerHidden ? 'Story trophies cannot be missed.' : (strategy?.pitfalls ?? 'Nothing in particular — a finish is enough.')],
     ['When it can be missed', missableNote],
   ];
   for (const [title, body] of blocks) detailEl.append(...detailBlock(title, body));
