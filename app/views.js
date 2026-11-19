@@ -1,8 +1,8 @@
-// Views: the checklist, the trophy detail panel, the progress bar and
-// the sources list. Every filter the competition asks for lives here:
-// kind (story, missable, collectibles, activities, online), grade,
-// search, and the spoiler setting, which hides the names and
-// descriptions of story trophies until they are earned.
+// Rendering for the guide: the checklist, the trophy detail panel, the
+// progress bar and the sources list. The filters the competition asks
+// for all live here — kind (story, missable, collectibles, activities,
+// online), grade, search — and the spoiler setting, which hides the
+// names and descriptions of story trophies until they are earned.
 import { renderRoadmap } from './roadmap.js';
 
 export const KIND_LABELS = {
@@ -23,34 +23,38 @@ export function trophyMatchesKind(trophy, kind) {
   return trophy.kind === kind;
 }
 
-export function filterTrophies(trophies, filters, tracker) {
-  const q = filters.search.trim().toLowerCase();
-  let out = trophies.filter((t) => {
-    if (!trophyMatchesKind(t, filters.kind)) return false;
-    if (filters.grade !== 'all' && t.grade !== filters.grade) return false;
-    if (filters.hideEarned && tracker.isEarned(t.name)) return false;
-    if (q) {
-      const hay = `${t.name} ${t.description} ${t.guide}`.toLowerCase();
-      if (!hay.includes(q)) return false;
-    }
-    return true;
-  });
-  if (filters.sort === 'grade') {
-    out = [...out].sort((a, b) => (GRADE_ORDER[a.grade] - GRADE_ORDER[b.grade]) || (a.id - b.id));
-  } else if (filters.sort === 'name') {
-    out = [...out].sort((a, b) => a.name.localeCompare(b.name));
-  }
-  return out;
+function matchesSearch(trophy, query) {
+  if (!query) return true;
+  const haystack = `${trophy.name} ${trophy.description} ${trophy.guide}`.toLowerCase();
+  return haystack.includes(query);
 }
 
-function gradeBadge(trophy) {
+export function filterTrophies(trophies, filters, tracker) {
+  const query = filters.search.trim().toLowerCase();
+  const kept = [];
+  for (const trophy of trophies) {
+    if (!trophyMatchesKind(trophy, filters.kind)) continue;
+    if (filters.grade !== 'all' && trophy.grade !== filters.grade) continue;
+    if (filters.hideEarned && tracker.isEarned(trophy.name)) continue;
+    if (!matchesSearch(trophy, query)) continue;
+    kept.push(trophy);
+  }
+  if (filters.sort === 'grade') {
+    kept.sort((a, b) => (GRADE_ORDER[a.grade] - GRADE_ORDER[b.grade]) || (a.id - b.id));
+  } else if (filters.sort === 'name') {
+    kept.sort((a, b) => a.name.localeCompare(b.name));
+  }
+  return kept;
+}
+
+function makeGradeBadge(trophy) {
   const span = document.createElement('span');
   span.className = `badge ${trophy.grade}`;
   span.textContent = trophy.grade;
   return span;
 }
 
-function sourceLine(trophy, sourceNames) {
+function makeSourceLine(trophy, sourceNames) {
   const p = document.createElement('p');
   p.className = 'src';
   const names = trophy.sources.map((key) => sourceNames[key] ?? key);
@@ -58,21 +62,47 @@ function sourceLine(trophy, sourceNames) {
   return p;
 }
 
+function makeTag(text, extraClass) {
+  const tag = document.createElement('span');
+  tag.className = 'tag' + (extraClass ? ` ${extraClass}` : '');
+  tag.textContent = text;
+  return tag;
+}
+
 export function renderProgress(trophies, tracker) {
   const earned = trophies.filter((t) => tracker.isEarned(t.name)).length;
   const total = trophies.length;
-  document.getElementById('progressFill').style.width = `${total ? Math.round((earned / total) * 100) : 0}%`;
-  document.getElementById('progressText').textContent = `${earned} of ${total} earned — ${total - earned} to the platinum`;
-  const byGrade = {};
-  for (const t of trophies) {
-    const key = t.grade;
-    byGrade[key] = byGrade[key] ?? { earned: 0, total: 0 };
-    byGrade[key].total += 1;
-    if (tracker.isEarned(t.name)) byGrade[key].earned += 1;
+  const pct = total ? Math.round((earned / total) * 100) : 0;
+  document.getElementById('progressFill').style.width = `${pct}%`;
+  document.getElementById('progressText').textContent = `${earned} of ${total} earned · ${total - earned} left for the platinum`;
+  const perGrade = {};
+  for (const trophy of trophies) {
+    perGrade[trophy.grade] = perGrade[trophy.grade] ?? { earned: 0, total: 0 };
+    perGrade[trophy.grade].total += 1;
+    if (tracker.isEarned(trophy.name)) perGrade[trophy.grade].earned += 1;
   }
   document.getElementById('gradeCounts').textContent = ['platinum', 'gold', 'silver', 'bronze']
-    .map((g) => `${byGrade[g].earned}/${byGrade[g].total} ${g}`)
+    .map((g) => `${perGrade[g].earned}/${perGrade[g].total} ${g}`)
     .join(' · ');
+}
+
+function makeCounter(trophy, tracker) {
+  const counter = document.createElement('div');
+  counter.className = 'counter';
+  const minus = document.createElement('button');
+  minus.type = 'button';
+  minus.textContent = '−';
+  minus.setAttribute('aria-label', `One fewer ${trophy.countLabel}`);
+  minus.addEventListener('click', () => tracker.bumpCount(trophy.name, -1, trophy.count));
+  const plus = document.createElement('button');
+  plus.type = 'button';
+  plus.textContent = '+';
+  plus.setAttribute('aria-label', `One more ${trophy.countLabel}`);
+  plus.addEventListener('click', () => tracker.bumpCount(trophy.name, 1, trophy.count));
+  const label = document.createElement('span');
+  label.textContent = `${tracker.getCount(trophy.name).toLocaleString()} / ${trophy.count.toLocaleString()} ${trophy.countLabel ?? ''}`;
+  counter.append(minus, label, plus);
+  return counter;
 }
 
 export function renderTrophyList(listEl, trophies, filters, tracker, sourceNames, openTrophy) {
@@ -94,27 +124,14 @@ export function renderTrophyList(listEl, trophies, filters, tracker, sourceNames
     const name = document.createElement('h3');
     if (spoilerHidden) {
       name.className = 'spoilerName';
-      name.textContent = 'Hidden story trophy — earn it to reveal';
+      name.textContent = 'Story trophy hidden — earn it to reveal it';
     } else {
       name.textContent = t.name;
     }
-    head.append(name, gradeBadge(t));
-    const kindTag = document.createElement('span');
-    kindTag.className = 'tag';
-    kindTag.textContent = KIND_LABELS[t.kind] ?? t.kind;
-    head.append(kindTag);
-    if (t.missable) {
-      const miss = document.createElement('span');
-      miss.className = 'tag missableTag';
-      miss.textContent = 'Missable';
-      head.append(miss);
-    }
-    if (t.hidden) {
-      const hid = document.createElement('span');
-      hid.className = 'tag hiddenTag';
-      hid.textContent = 'Hidden on PS';
-      head.append(hid);
-    }
+    head.append(name, makeGradeBadge(t));
+    head.append(makeTag(KIND_LABELS[t.kind] ?? t.kind));
+    if (t.missable) head.append(makeTag('Missable', 'missableTag'));
+    if (t.hidden) head.append(makeTag('Hidden on PS', 'hiddenTag'));
     card.append(head);
     const official = document.createElement('p');
     official.className = 'official';
@@ -127,31 +144,14 @@ export function renderTrophyList(listEl, trophies, filters, tracker, sourceNames
       guide.className = 'guide';
       guide.textContent = t.guide;
       card.append(guide);
-      card.append(sourceLine(t, sourceNames));
-    }
-    if (t.count != null && !spoilerHidden) {
-      const counter = document.createElement('div');
-      counter.className = 'counter';
-      const minus = document.createElement('button');
-      minus.type = 'button';
-      minus.textContent = '−';
-      minus.setAttribute('aria-label', `One fewer ${t.countLabel}`);
-      minus.addEventListener('click', () => tracker.bumpCount(t.name, -1, t.count));
-      const plus = document.createElement('button');
-      plus.type = 'button';
-      plus.textContent = '+';
-      plus.setAttribute('aria-label', `One more ${t.countLabel}`);
-      plus.addEventListener('click', () => tracker.bumpCount(t.name, 1, t.count));
-      const label = document.createElement('span');
-      label.textContent = `${tracker.getCount(t.name).toLocaleString()} / ${t.count.toLocaleString()} ${t.countLabel ?? ''}`;
-      counter.append(minus, label, plus);
-      card.append(counter);
+      card.append(makeSourceLine(t, sourceNames));
+      if (t.count != null) card.append(makeCounter(t, tracker));
     }
     const actions = document.createElement('div');
     actions.className = 'cardActions';
     const open = document.createElement('button');
     open.type = 'button';
-    open.textContent = spoilerHidden ? 'Why is this hidden?' : 'Full guide';
+    open.textContent = spoilerHidden ? 'Why hidden?' : 'Read the full guide';
     open.addEventListener('click', () => openTrophy(t.id));
     actions.append(open);
     card.append(actions);
@@ -161,12 +161,20 @@ export function renderTrophyList(listEl, trophies, filters, tracker, sourceNames
     const empty = document.createElement('p');
     empty.className = 'empty';
     empty.textContent = filters.kind === 'online'
-      ? 'No online trophies: all 55 are single-player and offline.'
-      : 'No trophies match these filters.';
+      ? 'There are no online trophies — all 55 are single-player and offline.'
+      : 'Nothing matches these filters.';
     listEl.append(empty);
   }
   const countEl = document.getElementById('resultCount');
   if (countEl) countEl.textContent = `Showing ${shown.length} of ${trophies.length} trophies.`;
+}
+
+function detailSection(title, body) {
+  const heading = document.createElement('h3');
+  heading.textContent = title;
+  const p = document.createElement('p');
+  p.textContent = body;
+  return [heading, p];
 }
 
 export function renderTrophyDetail(detailEl, trophy, tracker, sourceNames, trophies) {
@@ -186,27 +194,22 @@ export function renderTrophyDetail(detailEl, trophy, tracker, sourceNames, troph
   meta.className = 'src';
   meta.textContent = `${trophy.grade} · ${KIND_LABELS[trophy.kind] ?? trophy.kind}${trophy.hidden ? ' · hidden on PlayStation until earned' : ''}${trophy.missable ? ' · MISSABLE' : ''}`;
   detailEl.append(meta);
+  const missableNote = trophy.missable
+    ? 'Yes — this is the one missable trophy. Do the Chapter 1 balcony meditation before leaving Chapter 1 (see the warning at the top of the page).'
+    : 'It cannot be missed: free roam continues after the story, and there are no difficulty or online trophies.';
   const sections = [
     ['Official description', spoilerHidden ? 'Hidden until earned — turn spoilers off, or earn it, to read it.' : `“${trophy.description}”`],
     ['What to do', spoilerHidden ? 'This is a story trophy: play the story and it unlocks. Its name and description stay hidden here until you earn it.' : trophy.guide],
     ['Where and how', spoilerHidden ? 'See the roadmap’s Stage 1 for the story order.' : guideWhere(trophy)],
-    ['When it can be missed', trophy.missable
-      ? 'Yes — this is the one missable trophy. Do the Chapter 1 balcony meditation before leaving Chapter 1 (see the warning at the top of the page).'
-      : 'It cannot be missed: free roam continues after the story, and there are no difficulty or online trophies.'],
+    ['When it can be missed', missableNote],
   ];
-  for (const [title, body] of sections) {
-    const sh = document.createElement('h3');
-    sh.textContent = title;
-    const p = document.createElement('p');
-    p.textContent = body;
-    detailEl.append(sh, p);
-  }
+  for (const [title, body] of sections) detailEl.append(...detailSection(title, body));
   if (trophy.count != null && !spoilerHidden) {
     const p = document.createElement('p');
     p.textContent = `Your count: ${tracker.getCount(trophy.name).toLocaleString()} / ${trophy.count.toLocaleString()} ${trophy.countLabel ?? ''}.`;
     detailEl.append(p);
   }
-  detailEl.append(sourceLine(trophy, sourceNames));
+  detailEl.append(makeSourceLine(trophy, sourceNames));
   detailEl.scrollIntoView({ block: 'nearest' });
 }
 
