@@ -5,23 +5,23 @@
 // so a stage never names a trophy the data does not hold.
 export const ROADMAP_STAGES = [
   {
-    title: 'Stage 1 — Play the story, and save like it matters',
-    text: 'Chapters 1 to 4, the named missions and the finale (about 60–80 hours). There is no mission replay and no new game plus, and the game gives 15 manual save slots — keep a save at the start of every chapter and one before the final mission. Do the Chapter 1 balcony meditation now: it is the one missable trophy.',
+    title: 'Stage 1 — Play the story, and save as if it matters',
+    text: 'Chapters 1 to 4, the named missions and the finale — about 60–80 hours. There is no mission replay and no new game plus, and the game gives 15 manual save slots, so keep a save at the start of every chapter and one before the final mission. Do the Chapter 1 balcony meditation now: it is the one missable trophy.',
     trophyIds: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 28],
   },
   {
     title: 'Stage 2 — While you play: the one-off feats',
-    text: 'Things that happen once, in the world, with your partner or alone: partner robberies and wanted levels, Combat Focus, the airport, a Rhino, a jewelry store, Ocean Beach, the showroom, the bowling alley and the Scooter Bros app. Do them as they come up rather than hunting them later.',
+    text: 'Things that happen once, out in the world, with your partner or alone: partner robberies and wanted levels, Combat Focus, the airport, a Rhino, a jewelry store, Ocean Beach, the showroom, the bowling alley and the Scooter Bros app. Do them when they come up instead of hunting them down later.',
     trophyIds: [33, 34, 36, 37, 38, 39, 44, 45, 46, 47, 48, 49, 50, 51, 55],
   },
   {
     title: 'Stage 3 — Side stories: strangers and fixers',
-    text: 'Finish the mission strands for Andy, Kenton, Billy, Randy and Tyrone, hunt the unique animal for Bret, and complete eight Strangers & Freaks strands across Leonida.',
+    text: 'Play through the mission strands for Andy, Kenton, Billy, Randy and Tyrone, hunt the unique animal for Bret, and finish eight Strangers & Freaks strands across Leonida.',
     trophyIds: [22, 23, 24, 26, 27, 29, 25],
   },
   {
     title: 'Stage 4 — Activities: races, ranges and challenges',
-    text: 'The grind that fills the middle of the run: 250 stunts, all nine activity types tried, 42 Shooting Range gold medals, a Top Fun drone race won at all 14 locations, 20 different races won, beating Cal at fishing, one arcade game finished and 50 challenges done.',
+    text: 'The grind in the middle of the run: 250 stunts, all nine activity types tried, 42 Shooting Range gold medals, a Top Fun drone race won at all 14 locations, 20 different races won, beating Cal at fishing, one arcade game finished and 50 challenges done.',
     trophyIds: [15, 16, 17, 18, 19, 20, 21, 32],
   },
   {
@@ -30,8 +30,8 @@ export const ROADMAP_STAGES = [
     trophyIds: [28, 30, 31, 35, 40, 41, 42, 43, 52, 53, 54],
   },
   {
-    title: 'Stage 6 — Finish: 100% and the platinum',
-    text: 'Open Progress, then Stats, then 100% Completion and work the checklist — you only need selected portions of most activities. When A Long Road lands, Vice Got a Price! follows at once.',
+    title: 'Stage 6 — The finish: 100% and the platinum',
+    text: 'Open Progress, then Stats, then 100% Completion and work down the checklist — most activities only need selected portions. When A Long Road lands, Vice Got a Price! follows at once.',
     trophyIds: [14, 1],
   },
 ];
