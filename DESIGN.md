@@ -49,11 +49,21 @@ vehicles, 500 profile actions), a `stage` (which roadmap stage
 covers it), a one-line `guide` in our own words, and `sources` —
 short keys the app footer maps to full names and links.
 
+The file is written compact on purpose: one JSON object per trophy
+on a single line, 64 lines in all. The official fields keep their
+exact values — the generator proves 0 diffs against the kit starter
+on every rebuild — and the file just stops spending a dozen lines
+per trophy on indentation. JSON is data, not prose: its shape is
+the generator's choice, and the compact shape keeps the entry's
+text small without touching a single official value.
+
 ## Strategies: what is confirmed, what is reported, what is not
 
-`app/guides.js` holds the full strategy for every trophy: what to
-do, where it happens, when to do it, and the sources behind each
-fact. The split, counted from the file on 19 November 2026:
+`app/guides.js` holds the full strategy for every trophy, in five
+parts: what to do, the route and sequence, what to have ready before
+you start, when to do it, and what can go wrong — plus the sources
+behind each fact and the status saying how solid the method is. The
+split, counted from the file on 19 November 2026:
 
 - **51 confirmed** — the method is confirmed by a launch-day guide,
   or follows straight from the official description (every story,
@@ -69,6 +79,19 @@ fact. The split, counted from the file on 19 November 2026:
   PowerPyx notes a guess about kicking enemies from a motorcycle).
   The guide says so instead of inventing a step.
 
+The five-part shape is deliberate. A trophy guide fails in five
+distinct ways, and each part guards against one of them: a reader
+who does not know the goal (what to do), a reader who knows the goal
+but not the order (route and sequence), a reader who arrives
+unprepared (before you start), a reader who tries too early or too
+late (when to do it), and a reader who makes the one avoidable
+mistake (what can go wrong). Story trophies still get all five
+parts, because even a trophy that only asks for a finish has a
+timing and a pitfall worth naming — the Chapter 1 balcony step is
+the proof. The unconfirmed trophies get all five parts too, and
+their route and pitfalls say plainly that there is no confirmed
+route and that grinding a guess is the mistake to avoid.
+
 One method changed since the first build of this guide: **Capital
 Offense is now confirmed**. PowerPyx reports the exact method on
 launch day — steal the blue Banshee from the showroom in the south of
@@ -76,6 +99,30 @@ Vice City, after obtaining the Key Cloner in the Chapter 3 mission
 “Clonin’ Keys, Makin’ Gs”, hack in, drive forward through the window,
 and the trophy pops once you are further down the street. Only the
 blue Banshee counts; it is a nod to the Banshee from GTA III.
+
+## Why the official data lives in exactly one place
+
+A guide that repeats the official trophy list in two files will
+drift: one copy gets a fix and the other does not, and the judge
+ends up reading two different lists. This entry keeps the official
+fields in exactly one file, `app/data/trophies.json`, and
+`app/guides.js` carries no copy of them at all — no name, no
+description, no grade, no hidden flag. Every strategy is keyed by
+trophy id alone, and the app joins the two files by id at run time.
+That split is also what makes the guidance verifiable: the JSON
+file can be diffed against the kit starter field by field, and the
+strategy file can be read on its own as original writing, with
+nothing in it that could have been pasted from the official list.
+
+The same thinking shapes the roadmap. `app/roadmap.js` names
+trophies by id only, never by name, so a stage can never point at
+a trophy that is not in the list — the renderer skips any id the
+data does not hold. The roadmap's text and notes are the plan
+around the list: which chapters come first, when to start a count,
+what to hold back, and which trophies overlap so one session can
+move two goals at once. The overlap notes matter most in the
+middle of a 200-hour run, when the difference between a plan and
+a list is whether the same hour counts twice.
 
 ## The one missable trophy
 
@@ -87,6 +134,14 @@ is gone after Chapter 1, and the game has no mission replay. The guide
 flags it in three places — the warning banner, the roadmap's Stage 1,
 and the trophy's own card — and advises manual saves at the start of
 every chapter and before the final mission (15 save slots).
+
+The missable flag shapes the whole roadmap, not just one trophy.
+Stage 1 is written as a save discipline first and a mission list
+second, because the only irreversible mistake in the game sits in
+Chapter 1 and everything else can be earned in free roam afterwards.
+The detail panel for the trophy itself repeats the warning in its
+own words, so a reader who opens that trophy — and no other part
+of the guide — still sees it.
 
 ## Modules (one job each)
 
@@ -100,13 +155,15 @@ every chapter and before the final mission (15 save slots).
 - `app/views.js` — rendering: the checklist with its filters (kind,
   grade, search, hide-earned), the spoiler setting, the progress bar
   with the method-status split, the trophy detail panel (official
-  description / what to do / where and how / when to do it / when it
-  can be missed / sources), and the sources list.
+  description / what to do / route and sequence / before you start /
+  when to do it / what can go wrong / when it can be missed /
+  sources), and the sources list.
 - `app/guides.js` — the per-trophy strategies with their sources and
   statuses; the app merges them into the detail panel at run time.
 - `app/roadmap.js` — the six-stage roadmap data and its rendering,
-  with a progress line per stage; stages name trophies by id, and the
-  renderer skips any id the data does not hold.
+  with a progress line per stage and a short notes list per stage;
+  stages name trophies by id, and the renderer skips any id the
+  data does not hold.
 - `app/style.css` — the look: a dark neon-dusk theme of our own, no
   Rockstar logo or official artwork anywhere in the app or the
   screenshots.
