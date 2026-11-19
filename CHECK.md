@@ -57,11 +57,10 @@ library alone. Nothing was cut to chase that figure; the guides stay whole.
 
 ## Kit check
 
-`node cli/makefun.mjs check --kit . --repo <entry dir>` on the commit
-below: **4 passed, 0 failed, 17 skipped, 5 checked at submission** —
+`node cli/makefun.mjs check --kit . --repo <entry dir>` on commit
+f5d319041d5f42f96956a02eea7e738a7615a7cd (21 files, 679,482 bytes):
+**4 passed, 0 failed, 17 skipped, 5 checked at submission** —
 "ok: every check run here passes". The 17 skipped are the transcript
 checks, which run on the site from the sealed recording; the 5
 at-submission checks are repo_public, repo_owner,
 repo_created_after_open, commit_in_repo and duplicate_snapshot.
-(Kit check run after this commit; result recorded here once run —
-see the follow-up commit if this line still says pending.)
