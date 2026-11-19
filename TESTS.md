@@ -6,17 +6,18 @@ Node 22 in the grader; this machine's system node is v24).
 ## 1. The trophy list is the official list
 
 ```sh
-node -e "
-const mine = JSON.parse(require('fs').readFileSync('app/data/trophies.json','utf8'));
-const kit = JSON.parse(require('fs').readFileSync('../gta6-trophy-guide-01-kit/starter/app/data/trophies.json','utf8'));
-// 55 trophies; grades 1 platinum / 2 gold / 6 silver / 46 bronze; 28 hidden;
-// every name, description and grade identical to the kit's official list;
-// every guide non-blank and every trophy citing at least one source.
-"
+node ../scripts/gen-trophies.mjs   # rebuilds app/data/trophies.json from the kit starter
 ```
 
-`main.ts` runs the same check on every run (see §3): a list that lost
-a trophy or a guide fails the program, not the judge.
+The generator takes names, descriptions and grades straight from the
+kit starter's `trophies.json` and adds only our own one-line guides,
+kinds, counts, stages and source keys — so the official fields cannot
+drift. It reports the diff count itself (0 expected), the grade split
+(1 platinum / 2 gold / 6 silver / 46 bronze) and the hidden count
+(28). `main.ts` runs the same check on every run (see §3): a list that
+lost a trophy or a guide fails the program, not the judge. It also
+checks that every trophy has a strategy in `app/guides.js` with a
+valid status and source keys the data file defines.
 
 ## 2. The app runs offline in a real browser
 
@@ -25,11 +26,11 @@ node serve.ts          # http://localhost:8080
 ```
 
 Open it in desktop Chrome with the network off: the checklist, the
-roadmap, the detail panel, the filters, the spoiler setting and
-export/import all work. Tick a trophy, reload, and it stays ticked
-(localStorage). Export downloads `gta6-trophy-progress.json`; import
-reads it back. No request leaves the browser — the only fetch is the
-app's own `data/trophies.json`.
+roadmap with its per-stage progress, the detail panel, the filters,
+the spoiler setting and export/import all work. Tick a trophy, reload,
+and it stays ticked (localStorage). Export downloads
+`gta6-trophy-progress.json`; import reads it back. No request leaves
+the browser — the only fetch is the app's own `data/trophies.json`.
 
 ## 3. The entry program is deterministic
 
@@ -42,8 +43,9 @@ diff -r /tmp/out-a /tmp/out-b   # no output: byte-identical
 
 `main.ts` also verifies on every run: the dossier names
 `app/data/trophies.json`; the copied list holds 55 trophies with the
-official grade split and every guide non-blank and sourced; and
-`screenshots/` holds 3 to 4 images.
+official grade split and every guide non-blank and sourced; every
+trophy has a strategy in `app/guides.js`; and `screenshots/` holds 3
+to 4 images.
 
 ## 4. Screenshots are real browser captures
 
@@ -69,3 +71,15 @@ node cli/makefun.mjs check --kit . --repo <entry dir>
 
 Checks the LICENSE, the entrypoint (`main.ts`) and the snapshot's size
 caps. The transcript gate runs on the site, from the sealed recording.
+
+## 6. The 8,192-byte figure does not apply here
+
+The live requirements (`GET
+/api/competitions/gta6-trophy-guide-01/requirements`) show the
+`entry_size` check with `"applies": false`, and this competition's
+harness carries no `max_entry_bytes` (its caps are the gate's: app/ ≤
+993 files / 48 MiB, dossier ≤ 1.5 MiB, text ≤ 163,840 bytes,
+trophies.json ≤ 2 MiB, screenshots ≤ 256 KiB each). The kit's own
+starter already exceeds 8,192 bytes on its screenshots and vendor
+library alone. Nothing was cut to chase that figure; the guides stay
+whole.

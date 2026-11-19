@@ -1,27 +1,31 @@
-// Tracker state: the trophies the player has earned, the counts toward
-// counted trophies, and the spoiler setting. It is saved in
-// localStorage, with export to a file and import back. No network: the
-// state never leaves the browser except through the export the player
-// asks for.
-export const STORAGE_KEY = 'gta6-trophy-guide-01-v1';
+// Saved progress for Leonida Legend: which trophies the reader has
+// earned, the running counts toward the counted ones, and whether
+// story spoilers stay hidden. Everything lives in localStorage under
+// one key; the export file is the only way progress leaves the
+// browser, and the import reads that file back. Nothing here touches
+// the network.
+//
+// The demo state (?demo=1) is a showcase snapshot held in memory
+// only — it never writes to storage, so screenshots can show the
+// tracker mid-run without touching the reader's real progress.
 
-// A demo state for screenshots (?demo=1): a handful of trophies earned
-// and counts part-way, held in memory only and never written to
-// storage, so a screenshot shows the tracker at work without touching
-// the player's real progress.
+export const STORAGE_KEY = 'leonida-legend-progress-v2';
+
+// Showcase state for screenshots: five trophies earned, a few counts
+// part-way, spoilers on unless the URL says otherwise.
 export const DEMO_STATE = {
   earned: ['Master of None', 'Stick Fiddler', 'Whip It Good', 'On the Spot', 'Treat Yo Self'],
   counts: { 'Cunning Stunts': 137, 'You WAiNKer!': 42, 'Whip It Good': 100, 'Positive Mental Attitude': 3 },
 };
 
-function emptyState() {
+function blankProgress() {
   return { earned: [], counts: {}, spoilers: true };
 }
 
-export function loadStoredState() {
+export function loadSavedProgress() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return emptyState();
+    if (!raw) return blankProgress();
     const parsed = JSON.parse(raw);
     return {
       earned: Array.isArray(parsed.earned) ? parsed.earned : [],
@@ -29,57 +33,81 @@ export function loadStoredState() {
       spoilers: parsed.spoilers !== false,
     };
   } catch {
-    return emptyState();
+    return blankProgress();
   }
 }
 
-export function saveStoredState(state) {
+export function storeProgress(progress) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify({
-    earned: [...state.earned],
-    counts: state.counts,
-    spoilers: state.spoilers,
+    earned: [...progress.earned],
+    counts: progress.counts,
+    spoilers: progress.spoilers,
   }));
 }
 
-export function makeTracker(initial) {
-  const state = {
-    earned: new Set(initial.earned),
-    counts: { ...initial.counts },
-    spoilers: initial.spoilers,
+// The tracker object the views call. `earned` is a Set of trophy
+// names; `counts` maps a trophy name to its current count. Every
+// change persists and notifies the renderers.
+export function createTracker(saved) {
+  const progress = {
+    earned: new Set(saved.earned),
+    counts: { ...saved.counts },
+    spoilers: saved.spoilers,
   };
-  const listeners = new Set();
+  const watchers = new Set();
   const tracker = {
-    state,
-    onChange(fn) { listeners.add(fn); },
-    notify() { for (const fn of listeners) fn(); },
-    isEarned(name) { return state.earned.has(name); },
-    toggleEarned(name) {
-      if (state.earned.has(name)) state.earned.delete(name);
-      else state.earned.add(name);
-      tracker.persist();
-      tracker.notify();
+    progress,
+    watch(fn) { watchers.add(fn); },
+    changed() { for (const fn of watchers) fn(); },
+    earned(name) { return progress.earned.has(name); },
+    toggle(name) {
+      if (progress.earned.has(name)) progress.earned.delete(name);
+      else progress.earned.add(name);
+      tracker.save();
+      tracker.changed();
     },
-    getCount(name) { return state.counts[name] ?? 0; },
+    count(name) { return progress.counts[name] ?? 0; },
     setCount(name, value, target) {
       const next = Math.max(0, Math.min(target ?? value, value));
-      if (next === 0) delete state.counts[name];
-      else state.counts[name] = next;
-      tracker.persist();
-      tracker.notify();
+      if (next === 0) delete progress.counts[name];
+      else progress.counts[name] = next;
+      tracker.save();
+      tracker.changed();
     },
-    bumpCount(name, delta, target) {
-      tracker.setCount(name, tracker.getCount(name) + delta, target);
+    stepCount(name, delta, target) {
+      tracker.setCount(name, tracker.count(name) + delta, target);
     },
-    persist() { saveStoredState(state); },
-    exportJson() {
+    save() { storeProgress(progress); },
+    // Earned/total for one roadmap stage, counted from the stage's
+    // own trophy list, for the stage progress lines.
+    stageProgress(trophies, trophyIds) {
+      const inStage = trophyIds
+        .map((id) => trophies.find((t) => t.id === id))
+        .filter(Boolean);
+      return {
+        earned: inStage.filter((t) => progress.earned.has(t.name)).length,
+        total: inStage.length,
+      };
+    },
+    // Earned/total for one kind filter, shown beside the filter buttons.
+    kindProgress(trophies, kind) {
+      const inKind = kind === 'missable'
+        ? trophies.filter((t) => t.missable)
+        : trophies.filter((t) => t.kind === kind);
+      return {
+        earned: inKind.filter((t) => progress.earned.has(t.name)).length,
+        total: inKind.length,
+      };
+    },
+    exportText() {
       return JSON.stringify({
         game: 'Grand Theft Auto VI',
-        exported: 'gta6-trophy-guide-01',
-        earned: [...state.earned].sort(),
-        counts: state.counts,
+        guide: 'leonida-legend',
+        earned: [...progress.earned].sort(),
+        counts: progress.counts,
       }, null, 2);
     },
-    importJson(text) {
+    importText(text) {
       const parsed = JSON.parse(text);
       if (!parsed || typeof parsed !== 'object') throw new Error('import is not an object');
       if (parsed.earned !== undefined && !Array.isArray(parsed.earned)) {
@@ -88,25 +116,27 @@ export function makeTracker(initial) {
       if (parsed.counts !== undefined && (typeof parsed.counts !== 'object' || parsed.counts === null)) {
         throw new Error('import counts is not an object');
       }
-      state.earned = new Set(parsed.earned ?? []);
-      state.counts = { ...(parsed.counts ?? {}) };
-      tracker.persist();
-      tracker.notify();
+      progress.earned = new Set(parsed.earned ?? []);
+      progress.counts = { ...(parsed.counts ?? {}) };
+      tracker.save();
+      tracker.changed();
     },
-    reset() {
-      state.earned = new Set();
-      state.counts = {};
-      tracker.persist();
-      tracker.notify();
+    clear() {
+      progress.earned = new Set();
+      progress.counts = {};
+      tracker.save();
+      tracker.changed();
     },
   };
   return tracker;
 }
 
-export function downloadText(filename, text) {
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
-  a.download = filename;
-  a.click();
-  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+// Offer a text file for download — used only for the progress export
+// the reader asks for.
+export function downloadFile(filename, text) {
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
+  link.download = filename;
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(link.href), 1000);
 }

@@ -1,8 +1,8 @@
 {
  "game": "Grand Theft Auto VI",
  "platform": "PlayStation 5",
- "list": "the official 55 trophies, 2026-11-18",
- "verified": "Names, descriptions and grades are the official PlayStation list as reported by Exophase and cross-checked with PSNProfiles and TrueAchievements (Planet GTA 6, 18 Nov 2026); the visible/hidden split comes from the same cross-check: 27 visible, 28 hidden.",
+ "list": "the official 55 trophies, 2026-11-19",
+ "verified": "Names, descriptions and grades are the official PlayStation list as reported by Exophase and cross-checked with PSNProfiles and TrueAchievements (Planet GTA 6, 18 Nov 2026); the visible/hidden split comes from the same cross-check: 27 visible, 28 hidden. Strategy notes live in app/guides.js; the status of each method (confirmed / reported / unconfirmed) is tracked there.",
  "sources": {
   "official": "Official trophy list — PlayStation, as reported by Exophase and cross-checked with PSNProfiles and TrueAchievements",
   "planetgta6": "Planet GTA 6 — GTA 6 Trophies: All 55 trophies and Xbox achievements (planetgta6.com/en/gta-6-trophies/)",
@@ -10,7 +10,11 @@
   "keengamer": "KeenGamer — GTA 6 Trophy Guide & Platinum Roadmap, All 55 Trophies (keengamer.com)",
   "pushsquare": "Push Square — GTA 6 Trophy Guide & Roadmap (pushsquare.com)",
   "egamers": "EGamers — GTA 6 Trophy List: All 55 Trophies And Achievements (egamers.io)",
-  "powerpyx": "PowerPyx — cheats disable trophies and saving (as reported by Planet GTA 6)"
+  "powerpyx": "PowerPyx — GTA 6 Trophy Guide & Roadmap (powerpyx.com)",
+  "ofzen": "Of Zen and Computing — GTA 6 Trophy List, All 55 Trophies (ofzenandcomputing.com)",
+  "gtasix": "GTA Six How — GTA 6 Trophies and Achievements: The Full List (gtasix.how/trophies/)",
+  "gtavibes": "GTA Vibes — GTA 6 Trophy List: All 55 Trophies and Achievements (gtavibes.com)",
+  "gtabase": "GTA Base — GTA 6 Trophy Guide & Achievements List (gtabase.com)"
  },
  "trophies": [
   {
@@ -23,8 +27,11 @@
    "missable": false,
    "count": null,
    "stage": 6,
-   "guide": "Earn the other 54 trophies and this one follows: finish the story, reach 100% completion, then sweep up whatever is left — it pops the moment the 54th lands.",
-   "sources": ["official", "planetgta6"]
+   "guide": "The last one to land: collect the other 54 and this follows on its own.",
+   "sources": [
+    "official",
+    "planetgta6"
+   ]
   },
   {
    "id": 2,
@@ -36,8 +43,11 @@
    "missable": false,
    "count": null,
    "stage": 1,
-   "guide": "Finish the opening mission, Gone Fishing. This is the story's first mission, so it comes to you as you play — and it stays hidden on PlayStation until it pops.",
-   "sources": ["official", "planetgta6"]
+   "guide": "Play Gone Fishing, the mission that opens the story, to the end.",
+   "sources": [
+    "official",
+    "planetgta6"
+   ]
   },
   {
    "id": 3,
@@ -49,8 +59,12 @@
    "missable": false,
    "count": null,
    "stage": 1,
-   "guide": "Finish Chapter 1. A story trophy that lands on its own — but before the chapter ends, do the balcony meditation for Positive Mental Attitude (see that trophy): after Chapter 1 it is gone, and there is no mission replay.",
-   "sources": ["official", "planetgta6", "keengamer"]
+   "guide": "See Chapter 1 through; do the balcony meditation before the chapter closes.",
+   "sources": [
+    "official",
+    "planetgta6",
+    "keengamer"
+   ]
   },
   {
    "id": 4,
@@ -62,8 +76,11 @@
    "missable": false,
    "count": null,
    "stage": 1,
-   "guide": "Finish Chapter 2. A story trophy; once Jason and Lucia are both playable in this chapter, most of the list opens up.",
-   "sources": ["official", "planetgta6"]
+   "guide": "See Chapter 2 through; both protagonists become playable here.",
+   "sources": [
+    "official",
+    "planetgta6"
+   ]
   },
   {
    "id": 5,
@@ -75,8 +92,11 @@
    "missable": false,
    "count": null,
    "stage": 1,
-   "guide": "Finish Chapter 3. A story trophy that pops as the campaign rolls on.",
-   "sources": ["official", "planetgta6"]
+   "guide": "See Chapter 3 through; the map opens wide from here.",
+   "sources": [
+    "official",
+    "planetgta6"
+   ]
   },
   {
    "id": 6,
@@ -88,8 +108,12 @@
    "missable": false,
    "count": null,
    "stage": 1,
-   "guide": "Finish Chapter 4. A story trophy. The Chapter 4 optional mission 'That's Where The Money Is…' also opens the eight large bank vaults — save the last vaults until then.",
-   "sources": ["official", "planetgta6", "keengamer"]
+   "guide": "See Chapter 4 through; the optional vault mission appears in this chapter.",
+   "sources": [
+    "official",
+    "planetgta6",
+    "keengamer"
+   ]
   },
   {
    "id": 7,
@@ -101,8 +125,12 @@
    "missable": false,
    "count": null,
    "stage": 1,
-   "guide": "Finish the final mission. Keep a manual save from just before it: with no mission replay and no new game plus, that save is your only way back to the finale.",
-   "sources": ["official", "planetgta6", "keengamer"]
+   "guide": "Play the final mission to the end — and save manually just before it.",
+   "sources": [
+    "official",
+    "planetgta6",
+    "keengamer"
+   ]
   },
   {
    "id": 8,
@@ -114,8 +142,11 @@
    "missable": false,
    "count": null,
    "stage": 1,
-   "guide": "Finish the mission Breakfast Run. A story-mission trophy that pops when the mission ends.",
-   "sources": ["official", "planetgta6"]
+   "guide": "Finish the mission Breakfast Run.",
+   "sources": [
+    "official",
+    "planetgta6"
+   ]
   },
   {
    "id": 9,
@@ -127,8 +158,11 @@
    "missable": false,
    "count": null,
    "stage": 1,
-   "guide": "Finish the mission The Cartel Heist. A story-mission trophy that pops when the mission ends.",
-   "sources": ["official", "planetgta6"]
+   "guide": "Finish the mission The Cartel Heist.",
+   "sources": [
+    "official",
+    "planetgta6"
+   ]
   },
   {
    "id": 10,
@@ -140,8 +174,11 @@
    "missable": false,
    "count": null,
    "stage": 1,
-   "guide": "Finish the mission Child's Play. A story-mission trophy that pops when the mission ends.",
-   "sources": ["official", "planetgta6"]
+   "guide": "Finish the mission Child’s Play.",
+   "sources": [
+    "official",
+    "planetgta6"
+   ]
   },
   {
    "id": 11,
@@ -153,8 +190,11 @@
    "missable": false,
    "count": null,
    "stage": 1,
-   "guide": "Finish the mission Headliners. A story-mission trophy that pops when the mission ends.",
-   "sources": ["official", "planetgta6"]
+   "guide": "Finish the mission Headliners.",
+   "sources": [
+    "official",
+    "planetgta6"
+   ]
   },
   {
    "id": 12,
@@ -166,8 +206,11 @@
    "missable": false,
    "count": null,
    "stage": 1,
-   "guide": "Finish the mission VCIA Takedown. A story-mission trophy that pops when the mission ends.",
-   "sources": ["official", "planetgta6"]
+   "guide": "Finish the mission VCIA Takedown at the airport.",
+   "sources": [
+    "official",
+    "planetgta6"
+   ]
   },
   {
    "id": 13,
@@ -179,8 +222,11 @@
    "missable": false,
    "count": null,
    "stage": 1,
-   "guide": "Finish the mission Operation Savage Glory. A story-mission trophy that pops when the mission ends.",
-   "sources": ["official", "planetgta6"]
+   "guide": "Finish the mission Operation Savage Glory.",
+   "sources": [
+    "official",
+    "planetgta6"
+   ]
   },
   {
    "id": 14,
@@ -192,8 +238,12 @@
    "missable": false,
    "count": null,
    "stage": 6,
-   "guide": "Reach 100% completion. In-game, open Progress, then Stats, then 100% Completion for the checklist — most activities only need a portion (300 of 397 stunts, 70 of 80 challenges, 15 of 18 card sets), not everything. The hardest trophy on the list; a platinum run takes around 200 hours.",
-   "sources": ["official", "planetgta6", "keengamer"]
+   "guide": "Reach 100% completion; check Progress, then Stats, then 100% Completion.",
+   "sources": [
+    "official",
+    "planetgta6",
+    "keengamer"
+   ]
   },
   {
    "id": 15,
@@ -204,10 +254,14 @@
    "kind": "activities",
    "missable": false,
    "count": 250,
-   "countLabel": "stunts",
    "stage": 4,
-   "guide": "Finish 250 stunts. There are 397 stunts in total, so you need just over half — and 300 for 100% completion, so keep going past 250 instead of stopping.",
-   "sources": ["official", "pushsquare", "keengamer"]
+   "guide": "Complete 250 stunts of the 397 in the game.",
+   "sources": [
+    "official",
+    "pushsquare",
+    "keengamer"
+   ],
+   "countLabel": "stunts"
   },
   {
    "id": 16,
@@ -218,10 +272,13 @@
    "kind": "activities",
    "missable": false,
    "count": 9,
-   "countLabel": "activity types",
    "stage": 4,
-   "guide": "Try each of the nine activity types once. Sample one of each early; the trophy only asks you to try them, not to master any.",
-   "sources": ["official", "keengamer"]
+   "guide": "Try each of the nine activity types once.",
+   "sources": [
+    "official",
+    "keengamer"
+   ],
+   "countLabel": "activity types"
   },
   {
    "id": 17,
@@ -232,10 +289,13 @@
    "kind": "activities",
    "missable": false,
    "count": 42,
-   "countLabel": "gold medals",
    "stage": 4,
-   "guide": "Earn a gold medal in all 42 Shooting Range challenges. Gold every range challenge; 100% completion demands the same 42 of 42, so this is one of the few activities it wants in full.",
-   "sources": ["official", "keengamer"]
+   "guide": "Gold-medal all 42 Shooting Range challenges.",
+   "sources": [
+    "official",
+    "keengamer"
+   ],
+   "countLabel": "gold medals"
   },
   {
    "id": 18,
@@ -246,10 +306,13 @@
    "kind": "activities",
    "missable": false,
    "count": 14,
-   "countLabel": "locations",
    "stage": 4,
-   "guide": "Win a Top Fun Drone Race at every one of the 14 locations. One win at each; the 42 Drone Time Trials at the same locations are a separate 100% completion requirement.",
-   "sources": ["official", "keengamer"]
+   "guide": "Win a Top Fun Drone Race at all 14 locations.",
+   "sources": [
+    "official",
+    "keengamer"
+   ],
+   "countLabel": "locations"
   },
   {
    "id": 19,
@@ -260,10 +323,13 @@
    "kind": "activities",
    "missable": false,
    "count": 20,
-   "countLabel": "races",
    "stage": 4,
-   "guide": "Win 20 different races. Twenty distinct wins; 100% completion wants 30 of 40 unique races, so this is the shorter half of that grind.",
-   "sources": ["official", "keengamer"]
+   "guide": "Win 20 different races.",
+   "sources": [
+    "official",
+    "keengamer"
+   ],
+   "countLabel": "races"
   },
   {
    "id": 20,
@@ -275,8 +341,11 @@
    "missable": false,
    "count": null,
    "stage": 4,
-   "guide": "Beat Cal in a fishing challenge. Out-fish Cal — fishing is one of the activities the story introduces, so look for it once it opens up.",
-   "sources": ["official", "keengamer"]
+   "guide": "Beat Cal at fishing.",
+   "sources": [
+    "official",
+    "keengamer"
+   ]
   },
   {
    "id": 21,
@@ -288,8 +357,11 @@
    "missable": false,
    "count": null,
    "stage": 4,
-   "guide": "Finish an arcade game. Play any one arcade game through to the end.",
-   "sources": ["official", "keengamer"]
+   "guide": "Play an arcade game through to the end.",
+   "sources": [
+    "official",
+    "keengamer"
+   ]
   },
   {
    "id": 22,
@@ -301,8 +373,12 @@
    "missable": false,
    "count": null,
    "stage": 3,
-   "guide": "Finish the final mission for Andy. Complete Andy's mission strand; its last mission pops the trophy.",
-   "sources": ["official", "planetgta6", "keengamer"]
+   "guide": "Finish Andy’s mission strand.",
+   "sources": [
+    "official",
+    "planetgta6",
+    "keengamer"
+   ]
   },
   {
    "id": 23,
@@ -314,8 +390,12 @@
    "missable": false,
    "count": null,
    "stage": 3,
-   "guide": "Finish the final mission for Kenton. Complete Kenton's mission strand; its last mission pops the trophy.",
-   "sources": ["official", "planetgta6", "keengamer"]
+   "guide": "Finish Kenton’s mission strand.",
+   "sources": [
+    "official",
+    "planetgta6",
+    "keengamer"
+   ]
   },
   {
    "id": 24,
@@ -327,8 +407,12 @@
    "missable": false,
    "count": null,
    "stage": 3,
-   "guide": "Finish the final mission for Billy. Complete Billy's mission strand; its last mission pops the trophy.",
-   "sources": ["official", "planetgta6", "keengamer"]
+   "guide": "Finish Billy’s mission strand.",
+   "sources": [
+    "official",
+    "planetgta6",
+    "keengamer"
+   ]
   },
   {
    "id": 25,
@@ -339,10 +423,13 @@
    "kind": "story",
    "missable": false,
    "count": 8,
-   "countLabel": "strands",
    "stage": 3,
-   "guide": "Finish 8 mission strands for strangers across Leonida. Eight qualifying Strangers & Freaks strands; look for strangers while you explore the state, not just in Vice City.",
-   "sources": ["official", "keengamer"]
+   "guide": "Finish eight Strangers & Freaks strands across Leonida.",
+   "sources": [
+    "official",
+    "keengamer"
+   ],
+   "countLabel": "strands"
   },
   {
    "id": 26,
@@ -354,8 +441,12 @@
    "missable": false,
    "count": null,
    "stage": 3,
-   "guide": "Finish the final mission for Randy. Complete Randy's mission strand; its last mission pops the trophy.",
-   "sources": ["official", "planetgta6", "keengamer"]
+   "guide": "Finish Randy’s mission strand — it unlocks the Key Cloner.",
+   "sources": [
+    "official",
+    "planetgta6",
+    "keengamer"
+   ]
   },
   {
    "id": 27,
@@ -367,8 +458,12 @@
    "missable": false,
    "count": null,
    "stage": 3,
-   "guide": "Finish the final mission for Tyrone. Complete Tyrone's mission strand; its last mission pops the trophy.",
-   "sources": ["official", "planetgta6", "keengamer"]
+   "guide": "Finish Tyrone’s mission strand.",
+   "sources": [
+    "official",
+    "planetgta6",
+    "keengamer"
+   ]
   },
   {
    "id": 28,
@@ -379,10 +474,14 @@
    "kind": "collectibles",
    "missable": true,
    "count": 18,
-   "countLabel": "spots",
    "stage": 1,
-   "guide": "Meditate at every spot across Leonida — 18 spots. THE missable one: after the mission Down to Earth, find Lucia at Jason's house in the morning; when she mentions meditating, follow her to the balcony and accept. Do it before leaving Chapter 1 — it is gone after that chapter, and there is no mission replay. The other spots can wait; 15 of 18 count toward 100% completion.",
-   "sources": ["official", "outputlag", "keengamer"]
+   "guide": "Meditate at all 18 spots; the balcony one must happen in Chapter 1.",
+   "sources": [
+    "official",
+    "outputlag",
+    "keengamer"
+   ],
+   "countLabel": "spots"
   },
   {
    "id": 29,
@@ -394,8 +493,12 @@
    "missable": false,
    "count": null,
    "stage": 3,
-   "guide": "Hunt a unique animal for Bret. Take Bret's hunting work and bring down the unique animal he names; his Target Deck objectives also feed the 100% completion list.",
-   "sources": ["official", "planetgta6", "keengamer"]
+   "guide": "Hunt the unique animal Bret names.",
+   "sources": [
+    "official",
+    "planetgta6",
+    "keengamer"
+   ]
   },
   {
    "id": 30,
@@ -406,10 +509,13 @@
    "kind": "collectibles",
    "missable": false,
    "count": 3,
-   "countLabel": "sets",
    "stage": 5,
-   "guide": "Finish 3 Collectible Card sets. Three full sets; 100% completion wants 15 of 18 sets, so card hunting goes on well past this trophy.",
-   "sources": ["official", "keengamer"]
+   "guide": "Complete three Collectible Card sets.",
+   "sources": [
+    "official",
+    "keengamer"
+   ],
+   "countLabel": "sets"
   },
   {
    "id": 31,
@@ -420,10 +526,13 @@
    "kind": "collectibles",
    "missable": false,
    "count": 100,
-   "countLabel": "locations",
    "stage": 5,
-   "guide": "WAiNK It at 100 locations. Scan with the WAiNK app at 100 locations — scan vehicles and landmarks as you meet them from the start and the count builds on its own.",
-   "sources": ["official", "keengamer"]
+   "guide": "Scan with WAiNK at 100 locations.",
+   "sources": [
+    "official",
+    "keengamer"
+   ],
+   "countLabel": "locations"
   },
   {
    "id": 32,
@@ -434,10 +543,13 @@
    "kind": "activities",
    "missable": false,
    "count": 50,
-   "countLabel": "challenges",
    "stage": 4,
-   "guide": "Finish 50 Challenges. Fifty of the game's challenges; 100% completion wants 70 of 80, so this is the first two-thirds — skip the hardest ten and come back only if you need them.",
-   "sources": ["official", "keengamer"]
+   "guide": "Complete 50 challenges.",
+   "sources": [
+    "official",
+    "keengamer"
+   ],
+   "countLabel": "challenges"
   },
   {
    "id": 33,
@@ -449,8 +561,11 @@
    "missable": false,
    "count": null,
    "stage": 2,
-   "guide": "Lose a 4 star Wanted Level with your partner and escape the heat. Build a four-star wanted level while your partner is with you, then shake the cops — break line of sight and stay out of the search area until it clears.",
-   "sources": ["official", "keengamer"]
+   "guide": "Lose a four-star wanted level with your partner and escape.",
+   "sources": [
+    "official",
+    "keengamer"
+   ]
   },
   {
    "id": 34,
@@ -462,8 +577,11 @@
    "missable": false,
    "count": null,
    "stage": 2,
-   "guide": "Rob 3 shops back-to-back with your partner without losing your Wanted Level. Three shops in a row with your partner alongside, keeping the wanted level alive the whole run — don't let it clear between shops, and move to the next shop fast.",
-   "sources": ["official", "keengamer"]
+   "guide": "Rob three shops back-to-back with your partner, keeping the wanted level.",
+   "sources": [
+    "official",
+    "keengamer"
+   ]
   },
   {
    "id": 35,
@@ -474,10 +592,13 @@
    "kind": "collectibles",
    "missable": false,
    "count": 100,
-   "countLabel": "vehicles",
    "stage": 5,
-   "guide": "Discover 100 vehicles. Scan new vehicles with the WAiNK app as you find them; 100% completion wants 200 of 277 base models, so keep scanning past 100.",
-   "sources": ["official", "keengamer"]
+   "guide": "Discover 100 vehicles with WAiNK.",
+   "sources": [
+    "official",
+    "keengamer"
+   ],
+   "countLabel": "vehicles"
   },
   {
    "id": 36,
@@ -489,8 +610,11 @@
    "missable": false,
    "count": null,
    "stage": 2,
-   "guide": "Take down 5 enemies in a single use of Combat Focus. Trigger Combat Focus with at least five enemies in range and drop all five before it ends — pick a firefight with a group, not a lone enemy.",
-   "sources": ["official", "keengamer"]
+   "guide": "Drop five enemies in a single Combat Focus.",
+   "sources": [
+    "official",
+    "keengamer"
+   ]
   },
   {
    "id": 37,
@@ -502,8 +626,12 @@
    "missable": false,
    "count": null,
    "stage": 2,
-   "guide": "Make an unscheduled departure at VCIA. Steal a departing passenger aircraft from Vice City International Airport and take off in it.",
-   "sources": ["official", "planetgta6", "keengamer"]
+   "guide": "Steal a departing plane at VCIA and take off.",
+   "sources": [
+    "official",
+    "planetgta6",
+    "keengamer"
+   ]
   },
   {
    "id": 38,
@@ -515,8 +643,12 @@
    "missable": false,
    "count": null,
    "stage": 2,
-   "guide": "Kinda hot in these Rhinos. Steal a Rhino military tank and put it to use in combat.",
-   "sources": ["official", "planetgta6", "keengamer"]
+   "guide": "Steal a Rhino tank and use it in combat.",
+   "sources": [
+    "official",
+    "planetgta6",
+    "keengamer"
+   ]
   },
   {
    "id": 39,
@@ -528,8 +660,11 @@
    "missable": false,
    "count": null,
    "stage": 2,
-   "guide": "Rob a jewelry store without being detected. Get in and out without tripping detection — plan the approach, stay out of sight lines, and leave before anyone raises the alarm.",
-   "sources": ["official", "keengamer"]
+   "guide": "Rob a jewelry store unseen.",
+   "sources": [
+    "official",
+    "keengamer"
+   ]
   },
   {
    "id": 40,
@@ -540,10 +675,13 @@
    "kind": "activities",
    "missable": false,
    "count": 5,
-   "countLabel": "vaults",
    "stage": 5,
-   "guide": "Rob 5 Bank Vaults and escape. Five vaults, and get away clean each time; 100% completion wants all eight, unlocked by the Chapter 4 optional mission 'That's Where The Money Is…', so hold the last vaults until then.",
-   "sources": ["official", "keengamer"]
+   "guide": "Rob five bank vaults and escape each time.",
+   "sources": [
+    "official",
+    "keengamer"
+   ],
+   "countLabel": "vaults"
   },
   {
    "id": 41,
@@ -555,8 +693,11 @@
    "missable": false,
    "count": null,
    "stage": 5,
-   "guide": "Rob an Armored Truck and escape. Hit an armored truck and get away with the take.",
-   "sources": ["official", "keengamer"]
+   "guide": "Rob an armored truck and escape.",
+   "sources": [
+    "official",
+    "keengamer"
+   ]
   },
   {
    "id": 42,
@@ -567,10 +708,12 @@
    "kind": "collectibles",
    "missable": false,
    "count": 52,
-   "countLabel": "areas",
    "stage": 5,
-   "guide": "Explore all of Leonida. Cover all 52 areas and uncover the whole map — it fills in as you travel, so this mostly finishes itself if you explore widely instead of fast-travelling everywhere.",
-   "sources": ["official"]
+   "guide": "Visit all 52 areas of Leonida.",
+   "sources": [
+    "official"
+   ],
+   "countLabel": "areas"
   },
   {
    "id": 43,
@@ -581,10 +724,13 @@
    "kind": "activities",
    "missable": false,
    "count": 9,
-   "countLabel": "gangs",
    "stage": 5,
-   "guide": "Rob an Illegal Operation belonging to each gang. One illegal operation for each of the nine gangs; 100% completion wants all 39 gang operations, so this trophy is the first pass over that list.",
-   "sources": ["official", "keengamer"]
+   "guide": "Rob one Illegal Operation from each of the nine gangs.",
+   "sources": [
+    "official",
+    "keengamer"
+   ],
+   "countLabel": "gangs"
   },
   {
    "id": 44,
@@ -596,8 +742,14 @@
    "missable": false,
    "count": null,
    "stage": 2,
-   "guide": "Enjoy a cocktail with a view on Ocean Beach. Have a cocktail somewhere with a view over Ocean Beach; the exact trigger is still being pinned down by launch-day guides, so try the beachfront bars and check back.",
-   "sources": ["official", "planetgta6", "keengamer"]
+   "guide": "Order a cocktail with an Ocean Beach view — method still being confirmed.",
+   "sources": [
+    "official",
+    "planetgta6",
+    "keengamer",
+    "powerpyx",
+    "ofzen"
+   ]
   },
   {
    "id": 45,
@@ -609,8 +761,13 @@
    "missable": false,
    "count": null,
    "stage": 2,
-   "guide": "Smash your way out of a vehicle showroom in classic style. Break out of a vehicle showroom through the glass in the classic style; the exact method is still unconfirmed by launch-day guides.",
-   "sources": ["official", "planetgta6", "keengamer"]
+   "guide": "Steal the blue Banshee in south Vice City and drive it through the showroom window.",
+   "sources": [
+    "official",
+    "planetgta6",
+    "keengamer",
+    "powerpyx"
+   ]
   },
   {
    "id": 46,
@@ -622,8 +779,12 @@
    "missable": false,
    "count": null,
    "stage": 2,
-   "guide": "Follow-through at the Kolt & Associates' bowling alley. Steal the three key valuables at the Kolt & Associates bowling alley and get out.",
-   "sources": ["official", "planetgta6", "keengamer"]
+   "guide": "Take the three valuables from the Kolt & Associates bowling alley.",
+   "sources": [
+    "official",
+    "planetgta6",
+    "keengamer"
+   ]
   },
   {
    "id": 47,
@@ -635,8 +796,12 @@
    "missable": false,
    "count": null,
    "stage": 2,
-   "guide": "A partnership with mass appeal. Max out the Strength stat for both Jason and Lucia.",
-   "sources": ["official", "planetgta6", "keengamer"]
+   "guide": "Max Strength for both Jason and Lucia.",
+   "sources": [
+    "official",
+    "planetgta6",
+    "keengamer"
+   ]
   },
   {
    "id": 48,
@@ -647,10 +812,14 @@
    "kind": "activities",
    "missable": false,
    "count": 500,
-   "countLabel": "actions",
    "stage": 2,
-   "guide": "Choices made (for better or worse). Rack up 500 actions that feed your Criminal Profile — the profile grows as you make choices and act in the world, so this builds across a normal playthrough rather than needing a dedicated grind.",
-   "sources": ["official", "planetgta6", "keengamer"]
+   "guide": "Reach 500 actions on your Criminal Profile.",
+   "sources": [
+    "official",
+    "planetgta6",
+    "keengamer"
+   ],
+   "countLabel": "actions"
   },
   {
    "id": 49,
@@ -662,8 +831,13 @@
    "missable": false,
    "count": null,
    "stage": 2,
-   "guide": "Second time's the charm. The unlock method is still unconfirmed by launch-day guides — the name points at succeeding on a second attempt at something. Don't chase it; it will surface as guides confirm it.",
-   "sources": ["official", "planetgta6", "keengamer"]
+   "guide": "Succeed on a second attempt — exact trigger still unconfirmed.",
+   "sources": [
+    "official",
+    "planetgta6",
+    "keengamer",
+    "ofzen"
+   ]
   },
   {
    "id": 50,
@@ -675,8 +849,13 @@
    "missable": false,
    "count": null,
    "stage": 2,
-   "guide": "What the hell just happened? A hidden trophy whose unlock is still unconfirmed — it reads like a strange world encounter, so keep playing, explore odd places, and watch for strange events.",
-   "sources": ["official", "planetgta6", "keengamer"]
+   "guide": "Find the strange encounter in Kelly County after 2am — reported, unconfirmed.",
+   "sources": [
+    "official",
+    "planetgta6",
+    "keengamer",
+    "gtasix"
+   ]
   },
   {
    "id": 51,
@@ -688,8 +867,13 @@
    "missable": false,
    "count": null,
    "stage": 2,
-   "guide": "Bowl 'em over with a melee drive-by. Knock someone down with a melee attack from a moving vehicle; the precise method is still being pinned down by launch-day guides.",
-   "sources": ["official", "planetgta6", "keengamer"]
+   "guide": "Knock someone down with a melee attack from a moving vehicle — method still unconfirmed.",
+   "sources": [
+    "official",
+    "planetgta6",
+    "keengamer",
+    "powerpyx"
+   ]
   },
   {
    "id": 52,
@@ -700,10 +884,13 @@
    "kind": "activities",
    "missable": false,
    "count": 250000,
-   "countLabel": "$ laundered",
    "stage": 5,
-   "guide": "Earn $250,000 laundering Marked Bills through your contacts. Fence marked bills through your contacts until $250,000 is laundered; the same $250,000 counts for 100% completion, so it pays twice.",
-   "sources": ["official", "keengamer"]
+   "guide": "Launder $250,000 in marked bills through contacts.",
+   "sources": [
+    "official",
+    "keengamer"
+   ],
+   "countLabel": "$ laundered"
   },
   {
    "id": 53,
@@ -714,10 +901,13 @@
    "kind": "activities",
    "missable": false,
    "count": 100000,
-   "countLabel": "$ spent",
    "stage": 5,
-   "guide": "Spend $100,000 across all shops. Spend $100,000 in shops across the game — weapons, clothes, food and gear all count.",
-   "sources": ["official", "keengamer"]
+   "guide": "Spend $100,000 across shops.",
+   "sources": [
+    "official",
+    "keengamer"
+   ],
+   "countLabel": "$ spent"
   },
   {
    "id": 54,
@@ -728,10 +918,13 @@
    "kind": "collectibles",
    "missable": false,
    "count": 8,
-   "countLabel": "garages",
    "stage": 5,
-   "guide": "Purchase all garage properties. Buy all eight purchasable garages — they also give you somewhere to keep the vehicles you discover for Whip It Good.",
-   "sources": ["official", "keengamer"]
+   "guide": "Buy all eight garages.",
+   "sources": [
+    "official",
+    "keengamer"
+   ],
+   "countLabel": "garages"
   },
   {
    "id": 55,
@@ -742,10 +935,13 @@
    "kind": "activities",
    "missable": false,
    "count": 10,
-   "countLabel": "vehicles",
    "stage": 2,
-   "guide": "Register 10 vehicles to the Scooter Bros app. Register ten vehicles through the Scooter Bros app — any vehicles you drive count once registered.",
-   "sources": ["official", "keengamer"]
+   "guide": "Register ten vehicles in the Scooter Bros app.",
+   "sources": [
+    "official",
+    "keengamer"
+   ],
+   "countLabel": "vehicles"
   }
  ]
 }

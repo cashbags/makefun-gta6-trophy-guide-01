@@ -1,7 +1,7 @@
-// serve.ts — serve app/ on http://localhost:8080 for trying the guide
-// in a desktop browser. Standard library only; serves only files under
-// app/, with the right content type for html, css, js and json, and
-// nothing else. Run with `node serve.ts` from this directory.
+// serve.ts — serve app/ on http://localhost:8080 so the guide can be
+// tried in a desktop browser. Standard library only; it serves files
+// under app/ and nothing else, with the right content type for html,
+// css, js and json. Run with `node serve.ts` from this directory.
 import { createServer } from 'node:http';
 import { readFileSync, existsSync, statSync } from 'node:fs';
 import { join, extname, normalize } from 'node:path';
