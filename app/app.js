@@ -1,7 +1,8 @@
-// Bootstrap: load the trophy list, build the tracker from saved
-// progress (or the ?demo=1 showcase state), wire every control, and
-// render. The app fetches one file of its own — data/trophies.json —
-// and nothing else, so it works with the network off.
+// Bootstrap: fetch the trophy list, build the tracker from the saved
+// progress (or the ?demo=1 showcase state), wire up every control and
+// render. The app fetches a single file of its own —
+// data/trophies.json — and nothing else, so it works with the network
+// off.
 import { DEMO_STATE, downloadText, loadStoredState, makeTracker } from './tracker.js';
 import { renderAll, renderSources, renderTrophyDetail } from './views.js';
 
@@ -18,8 +19,10 @@ const doc = await (await fetch('data/trophies.json')).json();
 const trophies = doc.trophies;
 const sourceNames = doc.sources;
 
-const initial = params.get('demo') === '1' ? { ...DEMO_STATE, spoilers: params.get('spoilers') !== 'off' } : loadStoredState();
-const tracker = makeTracker(initial);
+const startingState = params.get('demo') === '1'
+  ? { ...DEMO_STATE, spoilers: params.get('spoilers') !== 'off' }
+  : loadStoredState();
+const tracker = makeTracker(startingState);
 
 const filters = {
   search: '',
@@ -39,10 +42,10 @@ function openTrophy(id) {
   renderTrophyDetail(detailEl, trophy, tracker, sourceNames, trophies);
 }
 
-const refs = { listEl, roadmapEl, sourceNames, openTrophy };
+const viewRefs = { listEl, roadmapEl, sourceNames, openTrophy };
 
 function render() {
-  renderAll(refs, trophies, filters, tracker);
+  renderAll(viewRefs, trophies, filters, tracker);
 }
 
 tracker.onChange(render);
@@ -69,14 +72,14 @@ spoilersEl.addEventListener('change', () => {
 const hideEarnedEl = document.getElementById('hideEarned');
 hideEarnedEl.addEventListener('change', () => { filters.hideEarned = hideEarnedEl.checked; render(); });
 
-for (const button of document.querySelectorAll('#kindFilters .kind')) {
+const kindButtons = [...document.querySelectorAll('#kindFilters .kind')];
+for (const button of kindButtons) {
+  button.classList.toggle('active', button.dataset.kind === filters.kind);
   button.addEventListener('click', () => {
     filters.kind = button.dataset.kind;
-    for (const b of document.querySelectorAll('#kindFilters .kind')) b.classList.toggle('active', b === button);
+    for (const b of kindButtons) b.classList.toggle('active', b === button);
     render();
   });
-  if (button.dataset.kind === filters.kind) button.classList.add('active');
-  else if (filters.kind === 'all' && button.dataset.kind !== 'all') button.classList.remove('active');
 }
 
 document.getElementById('exportBtn').addEventListener('click', () => {
@@ -90,13 +93,13 @@ importFile.addEventListener('change', async () => {
   try {
     tracker.importJson(await file.text());
   } catch {
-    alert('That file is not a progress export from this guide.');
+    alert('That file is not a progress export from this guide — pick the file Export gave you.');
   }
   importFile.value = '';
 });
 
 document.getElementById('resetBtn').addEventListener('click', () => {
-  if (confirm('Clear all earned trophies and counts?')) tracker.reset();
+  if (confirm('Clear every earned trophy and count?')) tracker.reset();
 });
 
 renderSources(document.getElementById('sourceList'), sourceNames, SOURCE_LINKS);
