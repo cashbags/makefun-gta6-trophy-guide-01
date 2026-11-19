@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leonida Legend — GTA VI Trophy Guide &amp; Tracker</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="top">
+  <p class="kicker">Grand Theft Auto VI &middot; PlayStation 5 &middot; Unofficial fan guide</p>
+  <h1>Leonida Legend</h1>
+  <p class="subtitle">The best guide and tracker for all 55 trophies — every official name, description and grade, a guide in our own words with its sources, a roadmap to the platinum, and the one missable trophy flagged.</p>
+  <div id="progressWrap" aria-label="Platinum progress">
+    <div id="progressBar"><div id="progressFill"></div></div>
+    <p id="progressText">0 of 55 earned</p>
+    <p id="gradeCounts"></p>
+  </div>
+</header>
+
+<section id="missable" aria-label="Missable trophy warning">
+  <h2>&#9888; One missable trophy</h2>
+  <p><strong>Positive Mental Attitude</strong> — meditate at every spot across Leonida. After the mission <em>Down to Earth</em>, find Lucia at Jason&rsquo;s house in the morning; when she mentions meditating, follow her to the balcony and accept. Do it <strong>before leaving Chapter 1</strong> — it disappears after that chapter, and there is no mission replay. Keep a manual save at the start of every chapter and one before the final mission.</p>
+  <p class="src">Sources: OutputLag trophy list; KeenGamer trophy guide &amp; platinum roadmap.</p>
+</section>
+
+<section id="roadmapSection" aria-label="Roadmap to the platinum">
+  <h2>Roadmap to the platinum</h2>
+  <p class="sectionNote">Built from the official descriptions: story first, one-off feats while you play, side stories, activities, collectibles and money, then 100% completion. Around 200 hours; no online trophies, no difficulty trophies, no mission medals. Cheats disable trophies and saving while active.</p>
+  <ol id="roadmapStages"></ol>
+</section>
+
+<section id="controls" aria-label="Tracker controls">
+  <div class="controlRow">
+    <label>Search <input id="search" type="search" placeholder="Trophy, mission or keyword…" autocomplete="off"></label>
+    <label>Grade
+      <select id="grade">
+        <option value="all">All grades</option>
+        <option value="platinum">Platinum</option>
+        <option value="gold">Gold</option>
+        <option value="silver">Silver</option>
+        <option value="bronze">Bronze</option>
+      </select>
+    </label>
+    <label>Sort
+      <select id="sort">
+        <option value="list">List order</option>
+        <option value="grade">Grade, then list</option>
+        <option value="name">Name A–Z</option>
+      </select>
+    </label>
+  </div>
+  <div class="controlRow" id="kindFilters" role="group" aria-label="Filter by kind">
+    <button type="button" data-kind="all" class="kind active">All</button>
+    <button type="button" data-kind="story" class="kind">Story</button>
+    <button type="button" data-kind="missable" class="kind">Missable</button>
+    <button type="button" data-kind="collectibles" class="kind">Collectibles</button>
+    <button type="button" data-kind="activities" class="kind">Activities</button>
+    <button type="button" data-kind="online" class="kind">Online</button>
+  </div>
+  <div class="controlRow">
+    <label class="check"><input id="spoilers" type="checkbox" checked> Spoilers off — hide story trophies until earned</label>
+    <label class="check"><input id="hideEarned" type="checkbox"> Hide earned</label>
+    <button id="exportBtn" type="button">Export progress</button>
+    <label class="importBtn">Import progress <input id="importFile" type="file" accept="application/json"></label>
+    <button id="resetBtn" type="button">Reset progress</button>
+  </div>
+  <p id="resultCount" aria-live="polite"></p>
+</section>
+
+<main id="list" aria-label="Trophy checklist"></main>
+
+<aside id="detail" hidden aria-label="Trophy guide detail"></aside>
+
+<footer id="sources">
+  <h2>Sources</h2>
+  <p>Every trophy name, description and grade is the official PlayStation list, as reported by Exophase and cross-checked with PSNProfiles and TrueAchievements. Every guide is written in our own words for this guide and cites its sources beside it — a source is cited, never copied. The official names and descriptions are the exception: they are shown as PlayStation publishes them.</p>
+  <ul id="sourceList"></ul>
+  <p class="fineprint">This guide works offline: it loads only its own files and fetches nothing. Links above open only when you follow them. Unofficial fan guide — not affiliated with Rockstar Games. No Rockstar logo, official artwork or game screenshots are used; the look is our own.</p>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
